@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <body style="font-family: Arial, sans-serif;">
+    <p>Hi {{ user.first_name }},</p>
+    <p>This our Halal Mart Platform</p>
+    <p>You requested to change your email address to <strong>{{ new_email }}</strong>.</p>
+
+    <p>
+      <a href="{{ confirm_url }}" 
+         style="background-color:#4CAF50;color:white;padding:10px 15px;text-decoration:none;border-radius:5px;">
+         Confirm New Email
+      </a>
+    </p>
+
+    <p>If you didn’t request this, please ignore this message.</p>
+
+    <p>Thanks,<br>Your Website Team</p>
+  </body>
+</html>

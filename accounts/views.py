@@ -19,7 +19,7 @@ from rest_framework import status
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework import generics, permissions
 from .serializers import ProfileSerializer
-
+from rest_framework.permissions import AllowAny
 
 
 class RegisterApiView(APIView):
@@ -60,12 +60,10 @@ class ActivateAccountView(View):
         if user is not None and generate_token.check_token(user, token):
             user.is_active = True
             user.save()
-            return redirect('login')  # change to your login route name
+            return redirect('login') 
         else:
-            return redirect('register')  # or render an error page
-        
-        
-from django.contrib.auth import authenticate
+            return redirect('register') 
+
 
 
 class LoginApiView(APIView):
@@ -125,16 +123,21 @@ class ChangePasswordApiView(APIView):
 
 
 
-class RequestPasswordResetEmail(APIView):
+
+class PasswordResetRequestAPIView(APIView):
     def post(self, request):
         email = request.data.get('email')
+        if not email:
+            return Response({"error": "Email is required."}, status=400)
+
         if not User.objects.filter(email=email).exists():
             return Response({"error": "No user with this email."}, status=404)
 
         user = User.objects.get(email=email)
         token = PasswordResetTokenGenerator().make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
-        reset_url = f"http://127.0.0.1:8000/reset-password/{uid}/{token}/"
+
+        reset_url = f"http://127.0.0.1:8000/api/accounts/reset-password-confirm/{uid}/{token}/"
 
         subject = "Reset Your Password"
         message = render_to_string('password_reset_email.html', {
@@ -150,9 +153,10 @@ class RequestPasswordResetEmail(APIView):
 
 
 
-    
 
-class PasswordResetConfirmApiView(APIView):
+class PasswordResetConfirmAPIView(APIView):
+    permission_classes = [AllowAny]
+    
     def post(self, request, uidb64, token):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
@@ -162,12 +166,76 @@ class PasswordResetConfirmApiView(APIView):
 
         if user is not None and PasswordResetTokenGenerator().check_token(user, token):
             new_password = request.data.get('new_password')
+            if not new_password:
+                return Response({"error": "New password is required."}, status=400)
             user.set_password(new_password)
             user.save()
             return Response({"message": "Password reset successful."}, status=200)
         else:
             return Response({"error": "Invalid or expired token."}, status=400)
         
+
+
+
+class RequestEmailChangeAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        new_email = request.data.get('email')
+
+        if not new_email:
+            return Response({"error": "New email is required."}, status=400)
+
+        # Check if email already used by someone else
+        if User.objects.filter(email=new_email).exists():
+            return Response({"error": "This email is already in use."}, status=400)
+
+        token = PasswordResetTokenGenerator().make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+        confirm_url = f"http://127.0.0.1:8000/api/accounts/confirm-email-change/{uid}/{token}/?new_email={new_email}"
+
+        # Email context for templates
+        context = {
+            'user': user,
+            'confirm_url': confirm_url,
+            'new_email': new_email
+        }
+
+        subject = "Confirm Your New Email Address"
+        # text_message = render_to_string('email_change_request.txt', context)
+        html_message = render_to_string('email_change_request.html', context)
+
+        email_message = EmailMultiAlternatives(subject, html_message, to=[new_email])
+        email_message.attach_alternative(html_message, "text/html")
+        email_message.send()
+
+        return Response({"message": "Verification email sent to new address."}, status=200)
+
+
+
+
+class ConfirmEmailChangeAPIView(APIView):
+    def get(self, request, uidb64, token):
+        new_email = request.GET.get('new_email')
+
+        if not new_email:
+            return Response({"error": "Missing new_email parameter."}, status=400)
+
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            return Response({"error": "Invalid user."}, status=400)
+
+        token_generator = PasswordResetTokenGenerator()
+        if not token_generator.check_token(user, token):
+            return Response({"error": "Invalid or expired token."}, status=400)
+
+        user.email = new_email
+        user.save()
+        return Response({"message": "Email updated successfully."}, status=200)
 
 
 
