@@ -5,7 +5,7 @@ from menu.models import FoodItem
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
-    city = models.CharField(max_length=100, default='Dhaka')  # default city
+    city = models.CharField(max_length=100, default='Dhaka') 
 
     DELIVERY_FEES = {
         'dhaka': 70,
@@ -19,7 +19,6 @@ class Cart(models.Model):
 
     @property
     def delivery_cost(self):
-        # lowercase for case-insensitive matching, default fee 130 if city not listed
         return self.DELIVERY_FEES.get(self.city.lower(), 130)
 
     @property

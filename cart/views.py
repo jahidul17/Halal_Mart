@@ -1,6 +1,5 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
 from .models import Cart, CartItem
 from menu.models import FoodItem
 
@@ -97,7 +96,7 @@ class CartView(APIView):
                 cart[food_id]['quantity'] += quantity
             else:
                 cart[food_id] = {
-                    "title": food.title,  # updated field
+                    "title": food.title,
                     "price": float(food.price),
                     "quantity": quantity
                 }
@@ -160,3 +159,5 @@ class CartView(APIView):
                 return Response({'message': 'Item removed from cart (anonymous)'})
             else:
                 return Response({'error': 'Item not in cart'}, status=404)
+
+
