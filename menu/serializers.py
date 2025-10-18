@@ -8,7 +8,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class FoodItemSerializer(serializers.ModelSerializer):
-    category_name = serializers.ReadOnlyField(source='category.name')
+    # category_name = serializers.ReadOnlyField(source='category.name') #it show only id
+    category = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
         model = FoodItem
