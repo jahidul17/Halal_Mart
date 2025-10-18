@@ -16,7 +16,7 @@ class FoodItem(models.Model):
         ('gm', 'Gram'),
     ]
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='foods')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, related_name='foods')
     title = models.CharField(max_length=200)
     sold_by = models.CharField(max_length=100)
     brand = models.CharField(max_length=100, blank=True, null=True)
