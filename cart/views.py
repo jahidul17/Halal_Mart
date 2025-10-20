@@ -72,12 +72,49 @@ class CartView(APIView):
             })
 
     # ---------------- POST Add Item ----------------
+    # def post(self, request):
+    #     food_id = str(request.data.get('food_item_id'))
+    #     quantity = int(request.data.get('quantity', 1))
+
+    #     try:
+    #         food = FoodItem.objects.get(id=food_id)
+    #     except FoodItem.DoesNotExist:
+    #         return Response({'error': 'Food item not found'}, status=404)
+
+    #     if request.user.is_authenticated:
+    #         cart = self.get_cart(request)
+    #         item, created = CartItem.objects.get_or_create(cart=cart, food_item=food)
+    #         if not created:
+    #             item.quantity += quantity
+    #         else:
+    #             item.quantity = quantity
+    #         item.save()
+    #         return Response({'message': 'Item added to cart (user)'})
+    #     else:
+    #         cart = self.get_cart(request)
+    #         if food_id in cart:
+    #             cart[food_id]['quantity'] += quantity
+    #         else:
+    #             cart[food_id] = {
+    #                 "title": food.title,
+    #                 "price": float(food.price),
+    #                 "quantity": quantity
+    #             }
+    #         self.save_cart_session(request, cart)
+    #         return Response({'message': 'Item added to cart (anonymous)'})
+    
     def post(self, request):
-        food_id = str(request.data.get('food_item_id'))
+        food_id = request.data.get('food_id')
         quantity = int(request.data.get('quantity', 1))
 
+        if not food_id:
+            return Response({'error': 'food_id is required'}, status=400)
+
         try:
+            food_id = int(food_id)
             food = FoodItem.objects.get(id=food_id)
+        except (ValueError, TypeError):
+            return Response({'error': 'Invalid food_id format'}, status=400)
         except FoodItem.DoesNotExist:
             return Response({'error': 'Food item not found'}, status=404)
 
@@ -92,16 +129,18 @@ class CartView(APIView):
             return Response({'message': 'Item added to cart (user)'})
         else:
             cart = self.get_cart(request)
-            if food_id in cart:
-                cart[food_id]['quantity'] += quantity
+            food_id_str = str(food_id)
+            if food_id_str in cart:
+                cart[food_id_str]['quantity'] += quantity
             else:
-                cart[food_id] = {
+                cart[food_id_str] = {
                     "title": food.title,
                     "price": float(food.price),
                     "quantity": quantity
                 }
             self.save_cart_session(request, cart)
             return Response({'message': 'Item added to cart (anonymous)'})
+
 
     # ---------------- PATCH Update Quantity / City ----------------
     def patch(self, request):
