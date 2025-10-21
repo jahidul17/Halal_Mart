@@ -15,18 +15,27 @@ class CheckoutView(APIView):
             return Response({'error': 'All fields are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            cart = Cart.objects.get(user=request.user)
-            cart_items = cart.items.all()
+            # Determine cart
+            if request.user.is_authenticated:
+                cart, _ = Cart.objects.get_or_create(user=request.user)
+            else:
+                session_key = request.session.session_key
+                if not session_key:
+                    request.session.create()
+                    session_key = request.session.session_key
+                cart, _ = Cart.objects.get_or_create(session_key=session_key)
 
+            cart_items = CartItem.objects.filter(cart=cart)
             if not cart_items.exists():
                 return Response({'error': 'Cart is empty.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            subtotal = sum(item.food_item.price * item.quantity for item in cart_items)
+            subtotal = sum(item.total_price for item in cart_items)
             delivery_cost = cart.delivery_cost
             total_amount = subtotal + delivery_cost
 
+            # Create order
             order = Order.objects.create(
-                user=request.user,
+                user=request.user if request.user.is_authenticated else None,
                 customer_name=customer_name,
                 contact_number=contact_number,
                 delivery_address=delivery_address,
@@ -34,6 +43,7 @@ class CheckoutView(APIView):
                 total_amount=total_amount
             )
 
+            # Add items to order
             for item in cart_items:
                 order.items.create(
                     food_item=item.food_item,
@@ -41,7 +51,7 @@ class CheckoutView(APIView):
                     price=item.food_item.price
                 )
 
-
+            # Clear user's or anonymous cart items
             cart_items.delete()
 
             return Response({
@@ -50,9 +60,5 @@ class CheckoutView(APIView):
                 'total_amount': total_amount
             }, status=status.HTTP_201_CREATED)
 
-        except Cart.DoesNotExist:
-            return Response({'error': 'Cart not found for this user.'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-

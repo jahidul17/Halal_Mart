@@ -4,7 +4,8 @@ from menu.models import FoodItem
 
 
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart', null=True, blank=True)
+    session_key = models.CharField(max_length=100, blank=True, null=True, unique=True)
     city = models.CharField(max_length=100, default='Dhaka') 
 
     DELIVERY_FEES = {
@@ -15,7 +16,9 @@ class Cart(models.Model):
     }
 
     def __str__(self):
-        return f"{self.user.username}'s Cart"
+        if self.user:
+            return f"{self.user.username}'s Cart"
+        return f"Cart {self.session_key}"
 
     @property
     def delivery_cost(self):
@@ -39,7 +42,7 @@ class CartItem(models.Model):
         unique_together = ('cart', 'food_item')
 
     def __str__(self):
-        return f"{self.food_item.name} ({self.quantity})"
+        return f"{self.food_item.title} ({self.quantity})"
 
     @property
     def total_price(self):

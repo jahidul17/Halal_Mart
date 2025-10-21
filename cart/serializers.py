@@ -1,12 +1,13 @@
 from rest_framework import serializers
 from .models import Cart, CartItem
 from menu.serializers import FoodItemSerializer
+from menu.models import FoodItem
 
 
 class CartItemSerializer(serializers.ModelSerializer):
     food_item = FoodItemSerializer(read_only=True)
     food_item_id = serializers.PrimaryKeyRelatedField(
-        queryset=CartItem.objects.none(),  # will override in view
+        queryset=FoodItem.objects.all(),  # ✅ Fix: use FoodItem model here
         source='food_item',
         write_only=True
     )

@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from cart.models import CartItem  
+from menu.models import FoodItem 
 
 class Order(models.Model):
     PAYMENT_METHOD_CHOICES = [
@@ -23,7 +23,9 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    food_item = models.ForeignKey(CartItem, on_delete=models.CASCADE, null=True, blank=True)
+    food_item = models.ForeignKey(FoodItem, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return f"{self.food_item.title} x {self.quantity}"
