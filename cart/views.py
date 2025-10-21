@@ -72,49 +72,24 @@ class CartView(APIView):
             })
 
     # ---------------- POST Add Item ----------------
-    # def post(self, request):
-    #     food_id = str(request.data.get('food_item_id'))
-    #     quantity = int(request.data.get('quantity', 1))
-
-    #     try:
-    #         food = FoodItem.objects.get(id=food_id)
-    #     except FoodItem.DoesNotExist:
-    #         return Response({'error': 'Food item not found'}, status=404)
-
-    #     if request.user.is_authenticated:
-    #         cart = self.get_cart(request)
-    #         item, created = CartItem.objects.get_or_create(cart=cart, food_item=food)
-    #         if not created:
-    #             item.quantity += quantity
-    #         else:
-    #             item.quantity = quantity
-    #         item.save()
-    #         return Response({'message': 'Item added to cart (user)'})
-    #     else:
-    #         cart = self.get_cart(request)
-    #         if food_id in cart:
-    #             cart[food_id]['quantity'] += quantity
-    #         else:
-    #             cart[food_id] = {
-    #                 "title": food.title,
-    #                 "price": float(food.price),
-    #                 "quantity": quantity
-    #             }
-    #         self.save_cart_session(request, cart)
-    #         return Response({'message': 'Item added to cart (anonymous)'})
-    
     def post(self, request):
-        food_id = request.data.get('food_id')
-        quantity = int(request.data.get('quantity', 1))
-
-        if not food_id:
-            return Response({'error': 'food_id is required'}, status=400)
+        raw_food_id = request.data.get('food_item_id')
+        if raw_food_id is None:
+            return Response({'error': 'food_item_id is required'}, status=400)
+        try:
+            food_id = int(raw_food_id)
+        except (ValueError, TypeError):
+            return Response({'error': 'Invalid food_item_id'}, status=400)
 
         try:
-            food_id = int(food_id)
-            food = FoodItem.objects.get(id=food_id)
+            quantity = int(request.data.get('quantity', 1))
+            if quantity < 1:
+                quantity = 1
         except (ValueError, TypeError):
-            return Response({'error': 'Invalid food_id format'}, status=400)
+            return Response({'error': 'Invalid quantity'}, status=400)
+
+        try:
+            food = FoodItem.objects.get(id=food_id)
         except FoodItem.DoesNotExist:
             return Response({'error': 'Food item not found'}, status=404)
 
@@ -127,26 +102,11 @@ class CartView(APIView):
                 item.quantity = quantity
             item.save()
             return Response({'message': 'Item added to cart (user)'})
-        else:
-            cart = self.get_cart(request)
-            food_id_str = str(food_id)
-            if food_id_str in cart:
-                cart[food_id_str]['quantity'] += quantity
-            else:
-                cart[food_id_str] = {
-                    "title": food.title,
-                    "price": float(food.price),
-                    "quantity": quantity
-                }
-            self.save_cart_session(request, cart)
-            return Response({'message': 'Item added to cart (anonymous)'})
 
-
-    # ---------------- PATCH Update Quantity / City ----------------
     def patch(self, request):
         city = request.data.get('city')
-        food_id = request.data.get('food_item_id')
-        quantity = request.data.get('quantity')
+        raw_food_id = request.data.get('food_item_id')
+        raw_quantity = request.data.get('quantity')
 
         if request.user.is_authenticated:
             cart = self.get_cart(request)
@@ -154,7 +114,15 @@ class CartView(APIView):
                 cart.city = city
                 cart.save()
                 return Response({'message': f'City updated to {city}'})
-            if food_id and quantity is not None:
+            if raw_food_id is not None and raw_quantity is not None:
+                try:
+                    food_id = int(raw_food_id)
+                except (ValueError, TypeError):
+                    return Response({'error': 'Invalid food_item_id'}, status=400)
+                try:
+                    quantity = int(raw_quantity)
+                except (ValueError, TypeError):
+                    return Response({'error': 'Invalid quantity'}, status=400)
                 try:
                     item = CartItem.objects.get(cart=cart, food_item_id=food_id)
                     item.quantity = quantity
@@ -163,20 +131,35 @@ class CartView(APIView):
                 except CartItem.DoesNotExist:
                     return Response({'error': 'Item not in cart'}, status=404)
             return Response({'error': 'No data provided'}, status=400)
-        else:
-            if city:
-                request.session['city'] = city
+
+
+    def delete(self, request):
+        raw_food_id = request.data.get('food_item_id')
+        if raw_food_id is None:
+            return Response({'error': 'food_item_id is required'}, status=400)
+        try:
+            food_id = int(raw_food_id)
+        except (ValueError, TypeError):
+            return Response({'error': 'Invalid food_item_id'}, status=400)
+
+        if request.user.is_authenticated:
             cart = self.get_cart(request)
-            if food_id and quantity is not None:
-                if food_id in cart:
-                    cart[food_id]['quantity'] = quantity
-                    self.save_cart_session(request, cart)
-                    return Response({'message': 'Quantity updated (anonymous)'})
-                else:
-                    return Response({'error': 'Item not in cart'}, status=404)
-            if city:
-                return Response({'message': f'City updated to {city}'})
-            return Response({'error': 'No data provided'}, status=400)
+            try:
+                item = CartItem.objects.get(cart=cart, food_item_id=food_id)
+                item.delete()
+                return Response({'message': 'Item removed from cart (user)'})
+            except CartItem.DoesNotExist:
+                return Response({'error': 'Item not in cart'}, status=404)
+        else:
+            cart = self.get_cart(request)
+            str_id = str(food_id)
+            if str_id in cart:
+                del cart[str_id]
+                self.save_cart_session(request, cart)
+                return Response({'message': 'Item removed from cart (anonymous)'})
+            else:
+                return Response({'error': 'Item not in cart'}, status=404)
+
 
     # ---------------- DELETE Remove Item ----------------
     def delete(self, request):
