@@ -20,7 +20,9 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework import generics, permissions
 from .serializers import ProfileSerializer
 from rest_framework.permissions import AllowAny
+import logging
 
+logger = logging.getLogger(__name__)
 
 class RegisterApiView(APIView):
     serializer_class = serializers.RegisterSerializer
@@ -34,20 +36,59 @@ class RegisterApiView(APIView):
             email_subject = "Activate Your Account"
             message = render_to_string('activate.html', {
                 'user': user,
-                'domain': 'http://127.0.0.1:8000',
+                'domain': 'http://127.0.0.1:8000',  # change in production
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': generate_token.make_token(user),
             })
-            email_message = EmailMultiAlternatives(email_subject, message, to=[user.email])
-            email_message.attach_alternative(message, "text/html")
-            email_message.send()
+
+            try:
+                email_message = EmailMultiAlternatives(
+                    email_subject, message, to=[user.email]
+                )
+                email_message.attach_alternative(message, "text/html")
+                email_message.send()
+            except Exception as e:
+                logger.error(f"Email sending failed for {user.email}: {e}")
+                # Don't stop registration — just warn the user
+                return Response({
+                    "message": "Account created, but email sending failed. Please contact support.",
+                    "tokens": tokens
+                }, status=status.HTTP_201_CREATED)
 
             return Response({
-                "message": "Check your email for confirmation.",
+                "message": "Account created successfully. Check your email to activate your account.",
                 "tokens": tokens
-            }, status=201)
+            }, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=400)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class RegisterApiView(APIView):
+#     serializer_class = serializers.RegisterSerializer
+
+#     def post(self, request):
+#         serializer = self.serializer_class(data=request.data)
+#         if serializer.is_valid():
+#             user = serializer.save()
+#             tokens = get_tokens_for_user(user)
+
+#             email_subject = "Activate Your Account"
+#             message = render_to_string('activate.html', {
+#                 'user': user,
+#                 'domain': 'http://127.0.0.1:8000',
+#                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#                 'token': generate_token.make_token(user),
+#             })
+#             email_message = EmailMultiAlternatives(email_subject, message, to=[user.email])
+#             email_message.attach_alternative(message, "text/html")
+#             email_message.send()
+
+#             return Response({
+#                 "message": "Check your email for confirmation.",
+#                 "tokens": tokens
+#             }, status=201)
+
+#         return Response(serializer.errors, status=400)
 
 class ActivateAccountView(View):
     def get(self, request, uidb64, token):

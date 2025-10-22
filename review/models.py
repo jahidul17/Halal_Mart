@@ -22,7 +22,9 @@ class Review(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.user.username} - {self.food_item.name} ({self.rating}★)"
+        food_title = self.food_item.title if self.food_item else "Deleted Item"
+        return f"{self.user.username} - {food_title} ({self.rating}★)"
+
 
     @property
     def stars(self):
