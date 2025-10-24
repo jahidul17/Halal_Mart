@@ -1,0 +1,2618 @@
+{
+	"info": {
+		"_postman_id": "f813b686-f4b3-44c3-9261-d7a414056ad0",
+		"name": "Halal Mart ApiCollection",
+		"description": "## **Halal Mart Backend API Collection Description**\n\nThe **Halal Mart API** is a RESTful backend service built using **Django REST Framework (DRF)**.\n\nIt provides a structured and secure interface for managing all operations of the **Halal Mart eCommerce system**, including user authentication, product management, cart functionality, checkout, payments, and customer reviews.\n\nThis API collection enables smooth integration between the frontend and backend, ensuring a complete online shopping experience — from browsing products to placing and reviewing orders.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37745715"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"first_name\": \"Demo\",\r\n\"last_name\": \"Test\",\r\n\"email\": \"bihij83311@lovleo.com\",\r\n\"password\": \"12345@dem\",\r\n\"confirm_password\": \"12345@dem\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"register",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"first_name\": \"Demo\",\r\n\"last_name\": \"Test\",\r\n\"email\": \"bihij83311@lovleo.com\",\r\n\"password\": \"12345@dem\",\r\n\"confirm_password\": \"12345@dem\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/register/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:29:19 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "777"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Account created successfully. Check your email to activate your account.\",\n    \"tokens\": {\n        \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MTkxNzM1NSwiaWF0IjoxNzYxMzEyNTU1LCJqdGkiOiI3NGRhNmZmM2RiZmU0YWY4YmY1YmQ3NTAyMWViZWVkZSIsInVzZXJfaWQiOiIzMSIsImVtYWlsIjoiYmloaWo4MzMxMUBsb3ZsZW8uY29tIiwiZmlyc3RfbmFtZSI6IkRlbW8iLCJsYXN0X25hbWUiOiJUZXN0In0.JpE_v9ZvNhXG11j-HCMHtzt5lBmZEubbKqXulkMzSic\",\n        \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzEzNDU1LCJpYXQiOjE3NjEzMTI1NTUsImp0aSI6IjI4NjRmOGIyMTFhZTQ5YzA5ZGVkYzBhNDhjYTIxNjBkIiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.PkFyzA_pvsUCRy6m3-tNmex2K7l00FnkC5obx8mhAsw\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "token/login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\": \"bihij83311@lovleo.com\",\r\n\"password\": \"12345@dem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "token/login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"email\": \"bihij83311@lovleo.com\",\r\n\"password\": \"12345@dem\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/login/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:31:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "722"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful.\",\n    \"tokens\": {\n        \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MTkxNzQ4MSwiaWF0IjoxNzYxMzEyNjgxLCJqdGkiOiI1NzUxMzdmNjQ0MWY0NTk4OTk4ZmIzNWZjNmI0OTg0YiIsInVzZXJfaWQiOiIzMSIsImVtYWlsIjoiYmloaWo4MzMxMUBsb3ZsZW8uY29tIiwiZmlyc3RfbmFtZSI6IkRlbW8iLCJsYXN0X25hbWUiOiJUZXN0In0.cQ6AA2aSYmpUoHcG_murEyLt8RbUKVWHD4KPiCD17L8\",\n        \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzEzNTgxLCJpYXQiOjE3NjEzMTI2ODEsImp0aSI6IjFhYTFlM2QyNmMzNTQzMjJiOWU5NTZmMWU1MjQ5YzY1IiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.XzeMi_B7K8FGwrz0KyNZPaWZXRmw8vOWwlxDMoaGt4Y\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "check profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzEzNTgxLCJpYXQiOjE3NjEzMTI2ODEsImp0aSI6IjFhYTFlM2QyNmMzNTQzMjJiOWU5NTZmMWU1MjQ5YzY1IiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.XzeMi_B7K8FGwrz0KyNZPaWZXRmw8vOWwlxDMoaGt4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\": \"bihij83311@lovleo.com\",\r\n\"password\": \"12345@dem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "check profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"email\": \"bihij83311@lovleo.com\",\r\n\"password\": \"12345@dem\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/profile/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:33:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "149"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 31,\n    \"user\": {\n        \"id\": 31,\n        \"first_name\": \"Demo\",\n        \"last_name\": \"Test\",\n        \"email\": \"bihij83311@lovleo.com\"\n    },\n    \"phone\": null,\n    \"address\": null,\n    \"bio\": null,\n    \"image\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Patch Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzEzNTgxLCJpYXQiOjE3NjEzMTI2ODEsImp0aSI6IjFhYTFlM2QyNmMzNTQzMjJiOWU5NTZmMWU1MjQ5YzY1IiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.XzeMi_B7K8FGwrz0KyNZPaWZXRmw8vOWwlxDMoaGt4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"01708908530\",\r\n  \"address\": \"Dhaka, Bangladesh\",\r\n  \"bio\": \"Food lover and coder.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Patch Profile",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"phone\": \"01708908530\",\r\n  \"address\": \"Dhaka, Bangladesh\",\r\n  \"bio\": \"Food lover and coder.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/profile/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:35:44 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 31,\n    \"user\": {\n        \"id\": 31,\n        \"first_name\": \"Demo\",\n        \"last_name\": \"Test\",\n        \"email\": \"bihij83311@lovleo.com\"\n    },\n    \"phone\": \"01708908530\",\n    \"address\": \"Dhaka, Bangladesh\",\n    \"bio\": \"Food lover and coder.\",\n    \"image\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzEzNTgxLCJpYXQiOjE3NjEzMTI2ODEsImp0aSI6IjFhYTFlM2QyNmMzNTQzMjJiOWU5NTZmMWU1MjQ5YzY1IiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.XzeMi_B7K8FGwrz0KyNZPaWZXRmw8vOWwlxDMoaGt4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"old_password\": \"12345@dem\",\r\n    \"new_password\": \"12345@tes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/change-password/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"change-password",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "change-password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"old_password\": \"12345@dem\",\r\n    \"new_password\": \"12345@tes\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/change-password/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"change-password",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:38:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password changed successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "request-reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"bihij83311@lovleo.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/request-reset-password/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"request-reset-password",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "request-reset-password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"bihij83311@lovleo.com\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/request-reset-password/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"request-reset-password",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:43:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password reset email sent.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "confirm rest password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"new_password\": \"12345@bih\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/reset-password-confirm/MzE/cy7046-bd5e0f1a2025902517023539aea88c58/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"reset-password-confirm",
+								"MzE",
+								"cy7046-bd5e0f1a2025902517023539aea88c58",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "confirm rest password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"new_password\": \"12345@bih\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/reset-password-confirm/MzE/cy7046-bd5e0f1a2025902517023539aea88c58/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"reset-password-confirm",
+										"MzE",
+										"cy7046-bd5e0f1a2025902517023539aea88c58",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:46:10 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Password reset successful.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "request-email-change",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzE0ODI5LCJpYXQiOjE3NjEzMTM5MzAsImp0aSI6IjI0YjA0OTBjMjQ5YjQzYmQ4MzFjZDlmZDk2ZWRkMWJiIiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.BkGWrqZbnuZt6i7Ls9rqhTm7WAvhSF8MFEDY2vey5rU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"rljl49kjnp@wyoxafp.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/request-email-change/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"request-email-change",
+								""
+							]
+						},
+						"description": "Write the old email in the body. Then, the active confirmation email link."
+					},
+					"response": [
+						{
+							"name": "request-email-change",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"rljl49kjnp@wyoxafp.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/request-email-change/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"request-email-change",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:53:13 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Verification email sent to new address.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzE0ODI5LCJpYXQiOjE3NjEzMTM5MzAsImp0aSI6IjI0YjA0OTBjMjQ5YjQzYmQ4MzFjZDlmZDk2ZWRkMWJiIiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.BkGWrqZbnuZt6i7Ls9rqhTm7WAvhSF8MFEDY2vey5rU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/accounts/logout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"accounts",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/accounts/logout/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										"logout",
+										""
+									]
+								}
+							},
+							"status": "Reset Content",
+							"code": 205,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 13:57:22 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logout successful.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Food Menu",
+			"item": [
+				{
+					"name": "categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzE1Nzc0LCJpYXQiOjE3NjEzMTQ4NzQsImp0aSI6IjAzNzhjYmU0ZGNjZTQ2OTE5ODdjYjhlYmJlYmFjYjUzIiwidXNlcl9pZCI6IjEiLCJlbWFpbCI6InRoZXphaGlka2hhbnNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlphaGlkdWwiLCJsYXN0X25hbWUiOiJJc2xhbSJ9.Vz1V3i-onfVZvSvt29f_2o0xrU_V-ge5kvO5H7FCpLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Sweets and Snacks\",\r\n  \"description\": \"This category includes sugary foods and snacks, which should be consumed in moderation. Examples include candies, pastries, and sugary beverages.\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/menu/categories/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"menu",
+								"categories",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "categories",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Sweets and Snacks\",\r\n  \"description\": \"This category includes sugary foods and snacks, which should be consumed in moderation. Examples include candies, pastries, and sugary beverages.\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/menu/categories/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"menu",
+										"categories",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 14:10:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"name\": \"Sweets and Snacks\",\n    \"description\": \"This category includes sugary foods and snacks, which should be consumed in moderation. Examples include candies, pastries, and sugary beverages.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get categories",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/menu/categories/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"menu",
+								"categories",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/menu/categories/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"menu",
+										"categories",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 15:02:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "386"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 5,\n    \"next\": \"http://127.0.0.1:8000/api/menu/categories/?page=2\",\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"name\": \"Fruits and Vegetables\",\n            \"description\": \"Apples, bananas, spinach, broccoli, etc.\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Protein\",\n            \"description\": \"Meats, poultry, fish, eggs, legumes, nuts, and seeds\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Dairy\",\n            \"description\": \"Milk, cheese, yogurt, and other products made from milk\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "food item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzE4ODIwLCJpYXQiOjE3NjEzMTc5MjAsImp0aSI6ImJmNDRhMjk2ZGVmYTRlZTJhYmJlMjNjN2IwODU5MWNkIiwidXNlcl9pZCI6IjEiLCJlbWFpbCI6InRoZXphaGlka2hhbnNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlphaGlkdWwiLCJsYXN0X25hbWUiOiJJc2xhbSJ9.1zcuzhUewfdRuoNjz_sWSyUwV-_BA4zrNt36EnOrLfw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Cowhead Pure Milk Low Fat 1Ltr\",\r\n  \"sold_by\": \"Halal Mart\",\r\n  \"price\": 1250.00,\r\n  \"unit\": \"ltr\",\r\n  \"brand\": \"Walton Dairy\",\r\n  \"category\": \"Dairy\",\r\n  \"description\": \"Milk is the liquid produced by the mammary glands of mammals, including humans.\",\r\n  \"availability\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/menu/foods/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"menu",
+								"foods",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "food item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Cowhead Pure Milk Low Fat 1Ltr\",\r\n  \"sold_by\": \"Halal Mart\",\r\n  \"price\": 1250.00,\r\n  \"unit\": \"ltr\",\r\n  \"brand\": \"Walton Dairy\",\r\n  \"category\": \"Dairy\",\r\n  \"description\": \"Milk is the liquid produced by the mammary glands of mammals, including humans.\",\r\n  \"availability\": true\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/menu/foods/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"menu",
+										"foods",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 15:00:35 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "298"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"title\": \"Cowhead Pure Milk Low Fat 1Ltr\",\n    \"sold_by\": \"Halal Mart\",\n    \"brand\": \"Walton Dairy\",\n    \"price\": \"1250.00\",\n    \"unit\": \"ltr\",\n    \"description\": \"Milk is the liquid produced by the mammary glands of mammals, including humans.\",\n    \"image\": null,\n    \"availability\": true,\n    \"created_at\": \"2025-10-24T15:00:35.981923Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get food items",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/menu/foods/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"menu",
+								"foods",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get food items",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/menu/foods/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"menu",
+										"foods",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 15:01:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1073"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 4,\n    \"next\": \"http://127.0.0.1:8000/api/menu/foods/?page=2\",\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 4,\n            \"title\": \"Cowhead Pure Milk Low Fat 1Ltr\",\n            \"sold_by\": \"Halal Mart\",\n            \"brand\": \"Walton Dairy\",\n            \"price\": \"1250.00\",\n            \"unit\": \"ltr\",\n            \"description\": \"Milk is the liquid produced by the mammary glands of mammals, including humans.\",\n            \"image\": null,\n            \"availability\": true,\n            \"created_at\": \"2025-10-24T15:00:35.981923Z\"\n        },\n        {\n            \"id\": 3,\n            \"category\": \"Protein\",\n            \"title\": \"Mabroom Dates (A Grade)\",\n            \"sold_by\": \"Halal Mart\",\n            \"brand\": \"broom\",\n            \"price\": \"1600.00\",\n            \"unit\": \"kg\",\n            \"description\": \"\",\n            \"image\": \"http://127.0.0.1:8000/media/food_images/Screenshot_4.png\",\n            \"availability\": true,\n            \"created_at\": \"2025-10-21T22:26:16.865760Z\"\n        },\n        {\n            \"id\": 2,\n            \"category\": \"Protein\",\n            \"title\": \"Egg Loose\",\n            \"sold_by\": \"Halal Mart\",\n            \"brand\": \"Loose\",\n            \"price\": \"10.00\",\n            \"unit\": \"pcs\",\n            \"description\": \"Humans and other hominids have consumed eggs for millions of years. The most widely consumed eggs are those of fowl, especially chickens.\",\n            \"image\": \"http://127.0.0.1:8000/media/food_images/Brown-eggs.webp\",\n            \"availability\": true,\n            \"created_at\": \"2025-10-21T22:23:41.879307Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Cart GET by Authenticate user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzIwMTkzLCJpYXQiOjE3NjEzMTkyOTMsImp0aSI6IjY4NTBiM2IxODNiMzQ4YjVhMmRlOGFiMTU3NTQ0MmNmIiwidXNlcl9pZCI6IjEiLCJlbWFpbCI6InRoZXphaGlka2hhbnNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlphaGlkdWwiLCJsYXN0X25hbWUiOiJJc2xhbSJ9.fBChW_FX52E-T1YZF1XQjNY5hS7xseAa_-qO0pLnpd4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"food_item_id\": 2,\r\n  \"quantity\": 12\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cart GET by Authenticate user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"food_item_id\": 2,\r\n  \"quantity\": 12\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/cart/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"cart",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 15:23:39 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Item added to cart (user)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cart GET by Authenticate user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cart GET by Authenticate user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/cart/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"cart",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 15:24:03 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "180"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"city\": \"Dhaka\",\n    \"subtotal\": 150,\n    \"delivery_cost\": 70,\n    \"total_price\": 220,\n    \"items\": [\n        {\n            \"item_id\": 3,\n            \"food_item_id\": 2,\n            \"title\": \"Egg Loose\",\n            \"price\": 10,\n            \"quantity\": 15,\n            \"total_price\": 150\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Anonymous user add cart",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"food_item_id\": 1,\r\n  \"quantity\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Anonymous user add cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"food_item_id\": 1,\r\n  \"quantity\": 2\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/cart/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"cart",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 16:28:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "sessionid=50r31q9ftfc79x5qjsqjk89o5qpm4ktz; expires=Fri, 07 Nov 2025 16:28:55 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Item added to cart (anonymous)\",\n    \"cart\": {\n        \"1\": {\n            \"title\": \"Apples\",\n            \"price\": 350,\n            \"quantity\": 2\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Anonymous cart",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Anonymous cart",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/cart/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"cart",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 16:30:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "167"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"city\": \"Dhaka\",\n    \"subtotal\": 700,\n    \"delivery_cost\": 70,\n    \"total_price\": 770,\n    \"items\": [\n        {\n            \"food_item_id\": \"1\",\n            \"title\": \"Apples\",\n            \"price\": 350,\n            \"quantity\": 2,\n            \"total_price\": 700\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Checkout/Order",
+			"item": [
+				{
+					"name": "checkout authenticate user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzIwMTkzLCJpYXQiOjE3NjEzMTkyOTMsImp0aSI6IjY4NTBiM2IxODNiMzQ4YjVhMmRlOGFiMTU3NTQ0MmNmIiwidXNlcl9pZCI6IjEiLCJlbWFpbCI6InRoZXphaGlka2hhbnNAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlphaGlkdWwiLCJsYXN0X25hbWUiOiJJc2xhbSJ9.fBChW_FX52E-T1YZF1XQjNY5hS7xseAa_-qO0pLnpd4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_name\": \"Zahidul Islam\",\r\n  \"contact_number\": \"01700000000\",\r\n  \"delivery_address\": \"House 10, Road 5, Dhaka\",\r\n  \"payment_method\": \"COD\"\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/checkout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"checkout",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "checkout authenticate user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"customer_name\": \"Zahidul Islam\",\r\n  \"contact_number\": \"01700000000\",\r\n  \"delivery_address\": \"House 10, Road 5, Dhaka\",\r\n  \"payment_method\": \"COD\"\r\n}\r\n\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/checkout/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"checkout",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 15:32:19 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order placed successfully.\",\n    \"order_id\": 3,\n    \"total_amount\": 220\n}"
+						}
+					]
+				},
+				{
+					"name": "Anonymous checkout success",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_name\": \"John Doe\",\r\n  \"contact_number\": \"017xxxxxxxx\",\r\n  \"delivery_address\": \"Dhaka\",\r\n  \"payment_method\": \"cash\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/checkout/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"checkout",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Anonymous checkout success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"customer_name\": \"John Doe\",\r\n  \"contact_number\": \"017xxxxxxxx\",\r\n  \"delivery_address\": \"Dhaka\",\r\n  \"payment_method\": \"cash\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/checkout/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"checkout",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 16:50:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept, Cookie"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "75"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "sessionid=50r31q9ftfc79x5qjsqjk89o5qpm4ktz; expires=Fri, 07 Nov 2025 16:50:16 GMT; HttpOnly; Max-Age=1209600; Path=/; SameSite=Lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order placed successfully.\",\n    \"order_id\": 4,\n    \"total_amount\": 1470\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Create review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYxMzIyODM1LCJpYXQiOjE3NjEzMjE5MzUsImp0aSI6ImRjYTIwNTgyYmQ1YjQ3NDI4NjE3NGEyZjVlYWUxNDE2IiwidXNlcl9pZCI6IjMxIiwiZW1haWwiOiJiaWhpajgzMzExQGxvdmxlby5jb20iLCJmaXJzdF9uYW1lIjoiRGVtbyIsImxhc3RfbmFtZSI6IlRlc3QifQ.6s-lJRy_3HOplWIChRzZ1KD7hTyoMoQ9UdXdpFapuBE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"food_item\": 1,\r\n    \"rating\": 4,\r\n    \"comment\": \"Good but not best.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reviews/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reviews",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create reviews",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"food_item\": 1,\r\n    \"rating\": 4,\r\n    \"comment\": \"Good but not best.\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 16:05:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "174"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"user\": \"bihij83311\",\n    \"full_name\": \"Demo Test\",\n    \"food_item\": 1,\n    \"rating\": 4,\n    \"stars\": \"⭐⭐⭐⭐\",\n    \"comment\": \"Good but not best.\",\n    \"created_at\": \"2025-10-24T16:05:56.880320Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get reviews",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reviews/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reviews",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get reviews",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 16:07:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "548"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 4,\n        \"user\": \"bihij83311\",\n        \"full_name\": \"Demo Test\",\n        \"food_item\": 1,\n        \"rating\": 4,\n        \"stars\": \"⭐⭐⭐⭐\",\n        \"comment\": \"Good but not best.\",\n        \"created_at\": \"2025-10-24T16:05:56.880320Z\"\n    },\n    {\n        \"id\": 2,\n        \"user\": \"thezahidkhans\",\n        \"full_name\": \"Zahidul Islam\",\n        \"food_item\": 1,\n        \"rating\": 5,\n        \"stars\": \"⭐⭐⭐⭐⭐\",\n        \"comment\": \"Nice and perfect!\",\n        \"created_at\": \"2025-10-22T19:27:48.289554Z\"\n    },\n    {\n        \"id\": 1,\n        \"user\": \"thezahidkhans\",\n        \"full_name\": \"Zahidul Islam\",\n        \"food_item\": 3,\n        \"rating\": 5,\n        \"stars\": \"⭐⭐⭐⭐⭐\",\n        \"comment\": \"Absolutely delicious!\",\n        \"created_at\": \"2025-10-22T19:10:05.892308Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Average",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reviews/average/3/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reviews",
+								"average",
+								"3",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Average",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/reviews/average/3/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"reviews",
+										"average",
+										"3",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 24 Oct 2025 16:15:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"food_item\": \"Mabroom Dates (A Grade)\",\n    \"average_rating\": 5\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

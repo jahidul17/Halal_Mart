@@ -7,7 +7,7 @@ from menu.models import FoodItem
 class CartItemSerializer(serializers.ModelSerializer):
     food_item = FoodItemSerializer(read_only=True)
     food_item_id = serializers.PrimaryKeyRelatedField(
-        queryset=FoodItem.objects.all(),  # ✅ Fix: use FoodItem model here
+        queryset=FoodItem.objects.all(), 
         source='food_item',
         write_only=True
     )

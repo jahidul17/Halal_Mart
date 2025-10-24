@@ -54,7 +54,7 @@ class FoodItemRatingView(APIView):
 
         avg_rating = food_item.reviews.aggregate(avg=Avg('rating'))['avg'] or 0
         return Response({
-            'food_item': food_item.name,
+            'food_item': food_item.title,
             'average_rating': round(avg_rating, 1),
         })
 
