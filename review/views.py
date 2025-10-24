@@ -23,12 +23,25 @@ class ReviewListCreateView(APIView):
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
 
+
     def post(self, request):
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid():
+            food_item = serializer.validated_data['food_item']
+
+            existing_review = Review.objects.filter(user=request.user, food_item=food_item).first()
+            if existing_review:
+                return Response(
+                    {'error': 'You have already reviewed this food item.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
 
 
 class FoodItemRatingView(APIView):

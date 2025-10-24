@@ -1,10 +1,12 @@
 from rest_framework import serializers
 from .models import Review
+from menu.models import FoodItem
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
     full_name=serializers.SerializerMethodField()
-    food_item=serializers.CharField(source='food_item.title', read_only=True)
+    food_item = serializers.PrimaryKeyRelatedField(queryset=FoodItem.objects.all())
     stars = serializers.CharField(read_only=True)
 
     class Meta:
