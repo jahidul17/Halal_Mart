@@ -62,8 +62,7 @@ This project focuses on creating a robust and modular backend using Django REST 
     ```
 
 
-5. **Create a superuser (As admin login -Optional)**
-Create .env file:
+5. **Create .env file:**
     ```bash
     EMAIL=Your_email
     EMAIL_PASSWORD=Email_generated_app_password_not_email_pass
